@@ -9,3 +9,14 @@ data/cifar-10-batches-py/readme.html
 data/cifar-10-batches-py/test_batch
 model.ipynb
 best_model.pth
+data/cifar_test_nolabels
+submission.csv
+data/KaggleData/cifar-10-python/cifar-10-batches-py/batches.meta
+data/KaggleData/cifar-10-python/cifar-10-batches-py/data_batch_1
+data/KaggleData/cifar-10-python/cifar-10-batches-py/data_batch_2
+data/KaggleData/cifar-10-python/cifar-10-batches-py/data_batch_3
+data/KaggleData/cifar-10-python/cifar-10-batches-py/data_batch_4
+data/KaggleData/cifar-10-python/cifar-10-batches-py/data_batch_5
+data/KaggleData/cifar-10-python/cifar-10-batches-py/readme.html
+data/KaggleData/cifar-10-python/cifar-10-batches-py/test_batch
+data/cifar_test_nolabels.pkl
