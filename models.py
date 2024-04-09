@@ -70,12 +70,12 @@ def ResNet3_with_dropout():
     return ResNet3Dropouts(BasicBlockDropouts, [2, 2, 2], dropout_rate=0.5)  # For example, a dropout rate of 0.5
 
 
-def test():
-    net = ResNet3_with_dropout()
-    y = net(torch.randn(1, 3, 32, 32))
-    print(y.size())
+# def test():
+#     net = ResNet3_with_dropout()
+#     y = net(torch.randn(1, 3, 32, 32))
+#     print(y.size())
 
-test()
+# test()
 
 
 
@@ -143,12 +143,12 @@ class ResNet2(nn.Module):
 def Resnet2(dropout_rate=0.0):
     return ResNet2(BasicBlock, [2, 2])
 
-def test():
-    net = Resnet2()
-    y = net(torch.randn(1, 3, 32, 32))
-    print(y.size())
+# def test():
+#     net = Resnet2()
+#     y = net(torch.randn(1, 3, 32, 32))
+#     print(y.size())
 
-test()
+# test()
 
 
 
@@ -189,12 +189,12 @@ class ResNet3(nn.Module):
 def Resnet3():
     return ResNet3(BasicBlock, [2, 2, 2])
 
-def test():
-    net = Resnet3()
-    y = net(torch.randn(1, 3, 32, 32))
-    print(y.size())
+# def test():
+#     net = Resnet3()
+#     y = net(torch.randn(1, 3, 32, 32))
+#     print(y.size())
 
-test()
+# test()
 
 
 
@@ -238,12 +238,12 @@ class ResNet4(nn.Module):
 def Resnet4():
     return ResNet4(BasicBlock, [2, 2, 2, 2]) #numbers indicate amount of blocks per layer. 1st 3, 2nd 2, 3rd 3, 4th 3,  
 
-def test():
-    net = Resnet4()
-    y = net(torch.randn(1, 3, 32, 32))
-    print(y.size())
+# def test():
+#     net = Resnet4()
+#     y = net(torch.randn(1, 3, 32, 32))
+#     print(y.size())
 
-test()
+# test()
 
 # Resnet 5 Layers: Feature maps (64, 64, 128, 128, 256)
 
@@ -287,10 +287,10 @@ class ResNet5(nn.Module):
 def Resnet5():
     return ResNet5(BasicBlock, [2, 2, 2, 2, 2]) # 5 layers with 2 blocks each
 
-def test():
-    net = Resnet5()
-    y = net(torch.randn(1, 3, 32, 32))
-    print(y.size())
+# def test():
+#     net = Resnet5()
+#     y = net(torch.randn(1, 3, 32, 32))
+#     print(y.size())
 
-test()
+# test()
 
