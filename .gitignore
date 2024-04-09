@@ -9,10 +9,24 @@ data/cifar-10-batches-py/readme.html
 data/cifar-10-batches-py/test_batch
 model.ipynb
 best_model.pth
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 data/cifar_test_nolabels
 submission.csv
+=======
+data/cifar_test_nolabels
+submission.csv
+data/KaggleData/cifar-10-python/cifar-10-batches-py/batches.meta
+data/KaggleData/cifar-10-python/cifar-10-batches-py/data_batch_1
+data/KaggleData/cifar-10-python/cifar-10-batches-py/data_batch_2
+data/KaggleData/cifar-10-python/cifar-10-batches-py/data_batch_3
+data/KaggleData/cifar-10-python/cifar-10-batches-py/data_batch_4
+data/KaggleData/cifar-10-python/cifar-10-batches-py/data_batch_5
+data/KaggleData/cifar-10-python/cifar-10-batches-py/readme.html
+data/KaggleData/cifar-10-python/cifar-10-batches-py/test_batch
+data/cifar_test_nolabels.pkl
+>>>>>>> improvegeneralization
 best_model_April1_8_30PM_81%Test.pth
 ResNet2_best_model.pth
 ResNet3_best_model.pth
@@ -48,4 +62,7 @@ modelResnet3_443_50DR_best_model.pth
 Resnet3_443_CosineAnnealingLR_best_model.pth
 Resnet3_443_StepLR_best_model.pth
 Resnet3_443_NoScheduler_best_model.pth
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> improvegeneralization
