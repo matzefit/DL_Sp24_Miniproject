@@ -36,9 +36,8 @@ def unpickle(file):
         dict = pickle.load(fo, encoding='bytes')
     return dict
 
-# Load dataset, combine batches, split, and visualize images
+#Load dataset, combine batches, split, and visualize images
 def load_and_prepare_data():
-    # Load and combine the training batches
     data_batches, label_batches = [], []
     for i in range(1, 6):
         batch = unpickle(f'data/KaggleData/cifar-10-python/cifar-10-batches-py/data_batch_{i}')
@@ -51,7 +50,7 @@ def load_and_prepare_data():
 
 X_train, X_val, y_train, y_val = load_and_prepare_data()
 
-# Define transformations
+#Define transformations
 stats = ((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
 transformations = {
     'train': transforms.Compose([
@@ -67,12 +66,12 @@ transformations = {
         transforms.ToTensor(), 
         transforms.Normalize(*stats)]),
         
-    # Normalization only for 'train_Default' scenario
+    #Normalization only 
     'normalization_only': transforms.Compose([
         transforms.ToTensor(), 
         transforms.Normalize(*stats)])
 }
-# Adjusting the CIFAR10Dataset class initialization to accept 'data_mode'
+#Adjusting the CIFAR10Dataset class initialization to accept 'data_mode'
 class CIFAR10Dataset(Dataset):
     def __init__(self, data, labels, transform=None, data_mode='default'):
         self.data = data
@@ -97,8 +96,11 @@ class CIFAR10Dataset(Dataset):
         return image, self.labels[idx % len(self.labels)]
 
 
+
 def main():
-    # Create datasets and DataLoader instances
+ 
+
+    #Create datasets and DataLoader instances
     datasets = {
         'train_Enhanced': CIFAR10Dataset(X_train, y_train, transform=transformations['normalization_only'], data_mode='train_Enhanced'),
         'valid': CIFAR10Dataset(X_val, y_val, transform=transformations['valid'])
@@ -106,8 +108,8 @@ def main():
 
     # Update loaders for each dataset
     loaders = {
-        'train_Enhanced': DataLoader(datasets['train_Enhanced'], batch_size=64, shuffle=True, num_workers=10, pin_memory=True),
-        'valid': DataLoader(datasets['valid'], batch_size=64, shuffle=False, num_workers=10,pin_memory=True)
+        'train_Enhanced': DataLoader(datasets['train_Enhanced'], batch_size=64, shuffle=True, num_workers=2, pin_memory=True),
+        'valid': DataLoader(datasets['valid'], batch_size=64, shuffle=False, num_workers=2,pin_memory=True)
     }
 
     print('Amount of Train Data batches (Enhanced):', len(loaders['train_Enhanced']))
@@ -124,7 +126,7 @@ def main():
     #--------------Training
     def train_and_evaluate_model(model, model_name, loaders, device, num_epochs=1):
         criterion = nn.CrossEntropyLoss()
-        optimizer = optim.AdamW(model.parameters(), lr=0.001, weight_decay=0.0001)
+        optimizer = optim.AdamW(model.parameters(), lr=0.001, weight_decay=0.00001)
         scheduler = ExponentialLR(optimizer, gamma=0.98)
 
         train_loss_history, valid_loss_history, valid_accuracy_history, train_accuracy_history = [], [], [], []
@@ -184,7 +186,7 @@ def main():
 
             if valid_accuracy > best_accuracy:
                 best_accuracy = valid_accuracy
-                model_path = f'{model_name}_Final_best_model2.pth'
+                model_path = f'{model_name}_Final_best_modelNoDropouts.pth'
                 torch.save(model.state_dict(), model_path)
                 print(f"New best model saved: {model_path}")
                 torch.cuda.empty_cache()
@@ -197,7 +199,7 @@ def main():
     #-----------------Training call
 
 
-    num_epochs = 2  # --------------number of Epochs
+    num_epochs = 200  # --------------number of Epochs
 
     all_metrics_final = {
         'train_losses': [],
@@ -206,63 +208,24 @@ def main():
         'train_accuracies': []
     }
 
+    # #Define Model
+    # def ResNet3_with_dropout_30DR():
+    #     return ResNet3Dropouts(BasicBlockDropouts, [4, 4, 3], dropout_rate=0)
 
-    def ResNet3_with_dropout_30DR():
-        return ResNet3Dropouts(BasicBlockDropouts, [4, 4, 3], dropout_rate=0.3)  # For example, a dropout rate of 0.5
+    # modelResnet3_443_30DR = ResNet3_with_dropout_30DR()
+    # total_paramsResnet3_443_30DR = sum(p.numel() for p in modelResnet3_443_30DR.parameters())
+    # print(f"Total parameters modelResnet3_443_30DR: {total_paramsResnet3_443_30DR}")
 
-    modelResnet3_443_30DR = ResNet3_with_dropout_30DR()
-    total_paramsResnet3_443_30DR = sum(p.numel() for p in modelResnet3_443_30DR.parameters())
-    print(f"Total parameters modelResnet3_443_30DR: {total_paramsResnet3_443_30DR}")
-
+    def Resnet3_443Exp():
+        return ResNet3(BasicBlock, [4,4,3])
+    model = Resnet3_443Exp().to(device)
+    total_paramsResnet3_443 = sum(p.numel() for p in model.parameters())
+    print(f"Total parameters modelResnet3_443: {total_paramsResnet3_443}")
     # Re-initialize the model for each weight decay to ensure training starts fresh
-    model = ResNet3_with_dropout_30DR().to(device)
-    metrics = train_and_evaluate_model(model, "modelResnet3_443_30DR", loaders, device, num_epochs)
 
-    # Unpack and store the returned metrics
-    all_metrics_final['train_losses'], \
-    all_metrics_final['valid_losses'], \
-    all_metrics_final['valid_accuracies'], \
-    all_metrics_final['train_accuracies'] = metrics
+    metrics = train_and_evaluate_model(model, "Resnet3_443Exp", loaders, device, num_epochs)
 
 
-    plt.figure(figsize=(20, 10))
-
-    # Training Loss
-    plt.subplot(2, 2, 1)
-    plt.plot(all_metrics_final['train_losses'], label='Train Loss')
-    plt.title('Training Loss')
-    plt.xlabel('Epoch')
-    plt.ylabel('Loss')
-    plt.legend()
-
-    # Validation Loss
-    plt.subplot(2, 2, 2)
-    plt.plot(all_metrics_final['valid_losses'], label='Validation Loss')
-    plt.title('Validation Loss')
-    plt.xlabel('Epoch')
-    plt.ylabel('Loss')
-    plt.legend()
-
-    # Validation Accuracy
-    plt.subplot(2, 2, 3)
-    plt.plot(all_metrics_final['valid_accuracies'], label='Validation Accuracy')
-    plt.title('Validation Accuracy')
-    plt.xlabel('Epoch')
-    plt.ylabel('Accuracy (%)')
-    plt.legend()
-
-    # Training Accuracy
-    plt.subplot(2, 2, 4)
-    plt.plot(all_metrics_final['train_accuracies'], label='Training Accuracy')
-    plt.title('Training Accuracy')
-    plt.xlabel('Epoch')
-    plt.ylabel('Accuracy (%)')
-    plt.legend()
-
-    plt.tight_layout()
-    # Save the figure
-    plt.savefig('finalModelPerformancePlot.png', dpi=300)
-    plt.show()
 
 
 
@@ -309,6 +272,53 @@ def main():
     print(submission_csv_path)
 
 
+
+#-------------- plot results
+    # Unpack and store the returned metrics
+    all_metrics_final['train_losses'], \
+    all_metrics_final['valid_losses'], \
+    all_metrics_final['valid_accuracies'], \
+    all_metrics_final['train_accuracies'] = metrics
+
+
+    plt.figure(figsize=(20, 10))
+
+    # Training Loss
+    plt.subplot(2, 2, 1)
+    plt.plot(all_metrics_final['train_losses'], label='Train Loss')
+    plt.title('Training Loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.legend()
+
+    # Validation Loss
+    plt.subplot(2, 2, 2)
+    plt.plot(all_metrics_final['valid_losses'], label='Validation Loss')
+    plt.title('Validation Loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.legend()
+
+    # Validation Accuracy
+    plt.subplot(2, 2, 3)
+    plt.plot(all_metrics_final['valid_accuracies'], label='Validation Accuracy')
+    plt.title('Validation Accuracy')
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy (%)')
+    plt.legend()
+
+    # Training Accuracy
+    plt.subplot(2, 2, 4)
+    plt.plot(all_metrics_final['train_accuracies'], label='Training Accuracy')
+    plt.title('Training Accuracy')
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy (%)')
+    plt.legend()
+
+    plt.tight_layout()
+    # Save the figure
+    plt.savefig('finalModelPerformancePlotnoDropouts.png', dpi=300)
+    plt.show()
 
 if __name__ == '__main__':
     main()  
