@@ -66,3 +66,18 @@ Resnet3_443_NoScheduler_best_model.pth
 >>>>>>> Stashed changes
 =======
 >>>>>>> improvegeneralization
+scriptFinalModel.ipynb
+FigureBlocksTestFinal.png
+FigureDataAlterationTestFinal.png
+FigureDropoutsTestFinal.png
+FigureGradientClippingTestFinal.png
+FigureLayerTestFinal.png
+FigureLearningRateSchedulerTestFinal.png
+FigureLRTestFinal.png
+FigureOptimizerTestFinal.png
+FigureWeightDecayTestFinal.png
+finalModelPerformancePlot_BestPerfSetup.png
+finalModelPerformancePlot.png
+finalModelPerformancePlotnoDropouts.png
+modelResnet3_443_30DR_Final_best_model.pth
+modelResnet3_443_30DR_Final_best_model.pth

@@ -230,10 +230,10 @@ def main():
 
 
 #------------- test dataset prediction
-
+    model_path='Resnet3_443Exp_Final_best_modelNoDropouts.pth'
 
     # Load best Model
-    model_path = 'modelResnet3_443_30DR_Final_best_model.pth'
+    # model_path = 'modelResnet3_443_30DR_Final_best_model.pth'
     #Load Testing data
     def unpickle(file):
         with open(file, 'rb') as fo:
