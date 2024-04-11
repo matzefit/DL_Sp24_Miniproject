@@ -5,8 +5,11 @@ Files in this repository:
 - scriptArchtest.ipynb is the notebook used for conducting the test for optimal amoutns of residual layers and blocks
 - scriptDataAlterationTest.ipynb is the notebook used for testing the optimal data augmentation strategy
 - scriptTrainParamstest.ipynb is the notebook used for testing various training settings and paramaters
-- trainFinalModel.py is a python script to train the final model for 200 epochs
-- Resnet3_443Exp_Final_best_modelNoDropouts.pth Model Checkpoint for performing the inference on the test dataset.
-- submissions.csv containing ID and Labels for the custom test dataset from kaggle 
+- scriptFinalModel.ipynb is the notebook used for running the final model training for 200 epochs. 
+- Resnet3_443_Exp_Final_best_model_secondRun.pth is the best Model Checkpoint for performing the inference on the test dataset.
+- submissionRerunBestModel.csv contains the ID and Labels for the custom test dataset from kaggle 
 
 
+Additional: 
+- data folder contains the CIFAR-10 data including the custom made test data for participating in the kaggle competition created for this midterm.
+- augmentViz.ipynb is a notebook for visualizing the applied data augmentation strategies in the training dataset. 
