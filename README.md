@@ -6,4 +6,6 @@ Files in this repository:
 - scriptDataAlterationTest.ipynb is the notebook used for testing the optimal data augmentation strategy
 - scriptTrainParamstest.ipynb is the notebook used for testing various training settings and paramaters
 - trainFinalModel.py is a python script to train the final model for 200 epochs
+- Resnet3_443Exp_Final_best_modelNoDropouts.pth Model Checkpoint for performing the inference on the test dataset. 
+
 
