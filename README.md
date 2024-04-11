@@ -10,3 +10,6 @@ Files in this repository:
 - submissionRerunBestModel.csv contains the ID and Labels for the custom test dataset from kaggle 
 
 
+Additional: 
+- data folder contains the CIFAR-10 data including the custom made test data for participating in the kaggle competition created for this midterm.
+- augmentViz.ipynb is a notebook for visualizing the applied data augmentation strategies in the training dataset. 
