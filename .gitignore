@@ -15,7 +15,6 @@ best_model.pth
 data/cifar_test_nolabels
 =======
 data/cifar_test_nolabels
-submission.csv
 data/KaggleData/cifar-10-python/cifar-10-batches-py/batches.meta
 data/KaggleData/cifar-10-python/cifar-10-batches-py/data_batch_1
 data/KaggleData/cifar-10-python/cifar-10-batches-py/data_batch_2
