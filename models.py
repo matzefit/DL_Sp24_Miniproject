@@ -78,8 +78,8 @@ def ResNet3_with_dropout():
 # test()
 
 
-
-class BasicBlock(nn.Module):
+#--------- use in final model alongside resnet 3
+class BasicBlock(nn.Module): 
     expansion = 1
 
     def __init__(self, in_planes, planes, stride=1):
@@ -153,7 +153,7 @@ def Resnet2(dropout_rate=0.0):
 
 
 
-# Resnet 3 Layers: Feature maps (64, 128, 256)
+# Resnet 3 Layers: Feature maps (64, 128, 256)   ---------------Final Model
 class ResNet3(nn.Module):
     def __init__(self, block, num_blocks, num_classes=10):
         super(ResNet3, self).__init__()
@@ -229,7 +229,7 @@ class ResNet4(nn.Module):
         out = self.layer2(out)
         out = self.layer3(out)
         out = self.layer4(out)
-        out = F.avg_pool2d(out, 4)
+        out = F.avg_pool2d(out, 4) 
         out = out.view(out.size(0), -1)
         out = self.linear(out)
         return out
