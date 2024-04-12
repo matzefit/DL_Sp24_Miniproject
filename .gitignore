@@ -79,3 +79,5 @@ finalModelPerformancePlot.png
 finalModelPerformancePlotnoDropouts.png
 modelResnet3_443_30DR_Final_best_model.pth
 modelResnet3_443_30DR_Final_best_model.pth
+ResNet3 1x1 AvgPooling_best_model.pth
+ResNet3 4x4 AvgPooling_best_model.pth
