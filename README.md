@@ -16,5 +16,5 @@ Additional:
 
 
 To reproduce the best model checkpoint (Resnet3_443_Exp_Final_best_model_secondRun.pth) simply open and run scriptFinalModel.ipynb. 
-The Output of this notebook is the prediction of test data labels (submissionRerunBestModel.csv) computed through the use of the best model checkpoint (Resnet3_443_Exp_Final_best_model_secondRun.pth)
+The Output of this notebook is the prediction of test data labels (submissionRerunBestModel.csv) computed through the use of the best model checkpoint (Resnet3_443_Exp_Final_best_model_secondRun.pth), which contains weights for the class "Resnet3" which uses the class "BasicBlocks" in models.py. 
 
